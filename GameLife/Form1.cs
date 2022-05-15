@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -43,8 +43,10 @@ namespace GameLife
         public void Init()
         {
             isPlaying = false;
-            mainTimer = new Timer();
-            mainTimer.Interval = 100;
+            mainTimer = new Timer
+            {
+                Interval = 100
+            };
             mainTimer.Tick += new EventHandler(UpdateStates);
             currentState = InitMap();
             nextState = InitMap();
@@ -54,8 +56,10 @@ namespace GameLife
         void ClearGame()
         {
             isPlaying = false;
-            mainTimer = new Timer();
-            mainTimer.Interval = 100;
+            mainTimer = new Timer
+            {
+                Interval = 100
+            };
             mainTimer.Tick += new EventHandler(UpdateStates);
             currentState = InitMap();
             nextState = InitMap();
@@ -80,7 +84,7 @@ namespace GameLife
             var restart = new ToolStripMenuItem("Начать заного");
             restart.Click += new EventHandler(Restart);
 
-            var play = new ToolStripMenuItem("Начать симуляцию");
+            var play = new ToolStripMenuItem("Начать");
             play.Click += new EventHandler(Play);
 
             menu.Items.Add(play);
@@ -111,7 +115,7 @@ namespace GameLife
             if (CheckGenerationDead())
             {
                 mainTimer.Stop();
-                MessageBox.Show("Поколение себя изжило :(");
+                MessageBox.Show("Все клетки погибли");
             }
         }
 
@@ -215,10 +219,12 @@ namespace GameLife
             {
                 for (int j = 0; j < mapSize; j++)
                 {
-                    Button button = new Button();
-                    button.Size = new Size(cellSize, cellSize);
-                    button.BackColor = Color.White;
-                    button.Location = new Point(j * cellSize, (i * cellSize) + offset);
+                    Button button = new Button
+                    {
+                        Size = new Size(cellSize, cellSize),
+                        BackColor = Color.White,
+                        Location = new Point(j * cellSize, (i * cellSize) + offset)
+                    };
                     button.Click += new EventHandler(OnCellClick);
                     this.Controls.Add(button);
                     cells[i, j] = button;
